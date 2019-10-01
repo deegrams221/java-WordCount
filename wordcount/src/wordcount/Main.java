@@ -4,7 +4,7 @@
 
 package wordcount;
 
-//import java.util.*;
+import java.util.*;
 
 public class Main 
 {
@@ -15,7 +15,9 @@ public class Main
         // remove puctuation marks and all lowercase
         String[] words = unText.replaceAll("\\p{Punct}","").toLowerCase().split("\\s+");
 
+        System.out.println("\n");
         System.out.println("*** HashMap ***");
+        System.out.println("\n");
         // Create a HashMap:  HashMap<key, value> newHashMap = new HashMap<key, value>();
         HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 
@@ -25,7 +27,7 @@ public class Main
             int hashcount = hashMap.containsKey(w) ? hashMap.get(w) : 0;
             hashMap.put(w, hashcount + 1);
 
-            System.out.println(w);
+            // System.out.println(w);
         }
 
         // sorted list, ArrayList
@@ -34,9 +36,26 @@ public class Main
             System.out.println("key: " + i + " value: " + hashMap.get(i));
         }
 
-            System.out.println();
-
-        // Print top 50
+        System.out.println("\n");
         
+        // have to convert HashMap to an arrayList in order to sort
+        ArrayList<HashMap.Entry<String, Integer>> sortedMap = new ArrayList<HashMap.Entry<String, Integer>>();
+        sortedMap.addAll(hashMap.entrySet());
+
+        // collections used to sort array list
+        Collections.sort(sortedMap, new Comparator<HashMap.Entry<String, Integer>>()
+        {
+            // create a method for comparator
+            public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2)
+            {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+
+        // sorts the top 50
+        for (int i = 0; i < 50; i++) 
+        {
+            System.out.println("Word: " + sortedMap.get(i).getKey() + " Count: " + sortedMap.get(i).getValue());
+        }
     }   
 }
