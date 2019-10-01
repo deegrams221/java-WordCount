@@ -30,7 +30,8 @@ public class Main
         }
 
         // convert HashMap to an arrayList
-
+        ArrayList<HashMap.Entry<String, Integer>> newArray = new ArrayList<HashMap.Entry<String, Integer>>();
+        newArray.addAll(frequency.entrySet());
 
         // sort array list
 
