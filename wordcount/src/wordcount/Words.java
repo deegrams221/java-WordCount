@@ -1,6 +1,6 @@
-package workcount;
+package wordcount;
 
-public class Wordcount
+public class Words
 {
     // fields
     private String words;
